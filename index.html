@@ -18,7 +18,7 @@
         <!-- Status Overview Section -->
         <section class="status-overview">
             <div class="status-card available">
-                <h3>Available Tricycles</h3>
+                <h3>Waiting for Passengers</h3>
                 <p class="count" id="available-count">0</p>
             </div>
             <div class="status-card busy">
@@ -26,8 +26,16 @@
                 <p class="count" id="busy-count">0</p>
             </div>
             <div class="status-card offline">
-                <h3>Offline</h3>
+                <h3>Unavailable</h3>
                 <p class="count" id="offline-count">0</p>
+            </div>
+        </section>
+
+        <!-- Broadcast Message -->
+        <section class="broadcast-section">
+            <div class="broadcast-box">
+                <h3>📢 Announcements</h3>
+                <p id="broadcast-message">Loading...</p>
             </div>
         </section>
 
@@ -55,7 +63,7 @@
 
         <!-- Student View -->
         <section id="student-view" class="view-section">
-            <h2>Available Tricycles</h2>
+            <h2>Available Tricycles (Waiting Queue)</h2>
             <div id="tricycle-list" class="tricycle-list">
                 <!-- Tricycle cards will be dynamically added here -->
             </div>
@@ -73,21 +81,40 @@
                     <input type="text" id="driver-name" placeholder="Enter your name">
                 </div>
                 <div class="form-group">
-                    <label for="tricycle-number">Tricycle Number:</label>
+                    <label for="contact-number">Contact Number:</label>
+                    <input type="text" id="contact-number" placeholder="e.g., 09171234567">
+                </div>
+                <div class="form-group">
+                    <label for="tricycle-number">Plate Number:</label>
                     <input type="text" id="tricycle-number" placeholder="e.g., TODA-001">
+                </div>
+                <div class="form-group">
+                    <label for="default-route">Default Route:</label>
+                    <input type="text" id="default-route" placeholder="e.g., TSU-SI to Market">
+                </div>
+                <div class="form-group">
+                    <label for="fare">Base Fare (₱):</label>
+                    <input type="number" id="fare" placeholder="15.00" step="0.01" min="0">
                 </div>
                 <div class="form-group">
                     <label for="status-select">Status:</label>
                     <select id="status-select">
-                        <option value="available">Available</option>
-                        <option value="busy">On Trip</option>
-                        <option value="offline">Offline</option>
+                        <option value="waiting">Waiting for Passengers</option>
+                        <option value="on_trip">On Trip</option>
+                        <option value="unavailable">Unavailable</option>
                     </select>
                 </div>
                 <button id="update-status-btn" class="btn-primary">Update Status</button>
                 <button id="register-driver-btn" class="btn-secondary">Register New Driver</button>
             </div>
             <div id="driver-message" class="message"></div>
+            
+            <!-- Broadcast Message Management -->
+            <div class="broadcast-management">
+                <h3>Broadcast Message</h3>
+                <textarea id="broadcast-input" rows="3" placeholder="Enter announcement message for students..."></textarea>
+                <button id="update-broadcast-btn" class="btn-primary">Update Broadcast</button>
+            </div>
         </section>
     </main>
 
