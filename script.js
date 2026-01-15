@@ -149,7 +149,7 @@ function updateTricycleList() {
     listContainer.innerHTML = '';
     
     if (tricycles.length === 0) {
-        listContainer.innerHTML = '<p style="text-align: center; color: #666;">No tricycles registered yet.</p>';
+        listContainer.innerHTML = '<p class="empty-message">No tricycles registered yet.</p>';
         return;
     }
     
@@ -157,7 +157,7 @@ function updateTricycleList() {
     const waitingTricycles = tricycles.filter(t => t.status === 'waiting');
     
     if (waitingTricycles.length === 0) {
-        listContainer.innerHTML = '<p style="text-align: center; color: #666;">No tricycles currently available. Please check back later.</p>';
+        listContainer.innerHTML = '<p class="empty-message">No tricycles currently available. Please check back later.</p>';
         return;
     }
     
@@ -250,6 +250,13 @@ document.getElementById('register-driver-btn').addEventListener('click', functio
     
     if (!driverName || !contactNumber || !tricycleNumber || !defaultRoute || !fare) {
         showMessage('Please fill in all fields', 'error');
+        return;
+    }
+    
+    // Validate Philippine mobile number format
+    const phoneRegex = /^09[0-9]{9}$/;
+    if (!phoneRegex.test(contactNumber)) {
+        showMessage('Please enter a valid Philippine mobile number (11 digits starting with 09)', 'error');
         return;
     }
     
