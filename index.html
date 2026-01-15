@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodaTrack - Real-Time Tricycle Monitoring System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🚲 TodaTrack</h1>
+            <p class="subtitle">TSU-SI TODA Real-Time Monitoring System</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Status Overview Section -->
+        <section class="status-overview">
+            <div class="status-card available">
+                <h3>Available Tricycles</h3>
+                <p class="count" id="available-count">0</p>
+            </div>
+            <div class="status-card busy">
+                <h3>On Trip</h3>
+                <p class="count" id="busy-count">0</p>
+            </div>
+            <div class="status-card offline">
+                <h3>Offline</h3>
+                <p class="count" id="offline-count">0</p>
+            </div>
+        </section>
+
+        <!-- Peak Hour Alert -->
+        <section class="alert-section" id="peak-hour-alert" style="display: none;">
+            <div class="alert">
+                ⚠️ Peak Hour Alert: High demand expected (6:00 PM - 9:00 PM)
+            </div>
+        </section>
+
+        <!-- Weather Condition -->
+        <section class="weather-section">
+            <div class="weather-info">
+                <h3>Current Conditions</h3>
+                <p id="weather-status">Fair Weather</p>
+                <button id="weather-toggle" class="btn-secondary">Toggle Weather</button>
+            </div>
+        </section>
+
+        <!-- View Toggle -->
+        <section class="view-toggle">
+            <button id="student-view-btn" class="btn-primary active">Student View</button>
+            <button id="driver-view-btn" class="btn-primary">Driver View</button>
+        </section>
+
+        <!-- Student View -->
+        <section id="student-view" class="view-section">
+            <h2>Available Tricycles</h2>
+            <div id="tricycle-list" class="tricycle-list">
+                <!-- Tricycle cards will be dynamically added here -->
+            </div>
+            <div class="last-updated">
+                Last updated: <span id="last-updated-time">--:--:--</span>
+            </div>
+        </section>
+
+        <!-- Driver View -->
+        <section id="driver-view" class="view-section" style="display: none;">
+            <h2>Driver Control Panel</h2>
+            <div class="driver-controls">
+                <div class="form-group">
+                    <label for="driver-id">Driver ID:</label>
+                    <input type="text" id="driver-id" placeholder="Enter your driver ID">
+                </div>
+                <div class="form-group">
+                    <label for="driver-name">Driver Name:</label>
+                    <input type="text" id="driver-name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="tricycle-number">Tricycle Number:</label>
+                    <input type="text" id="tricycle-number" placeholder="e.g., TODA-001">
+                </div>
+                <div class="form-group">
+                    <label for="status-select">Status:</label>
+                    <select id="status-select">
+                        <option value="available">Available</option>
+                        <option value="busy">On Trip</option>
+                        <option value="offline">Offline</option>
+                    </select>
+                </div>
+                <button id="update-status-btn" class="btn-primary">Update Status</button>
+                <button id="register-driver-btn" class="btn-secondary">Register New Driver</button>
+            </div>
+            <div id="driver-message" class="message"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 TodaTrack - TSU-SI TODA Community</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
