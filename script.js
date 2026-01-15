@@ -33,7 +33,14 @@ function initializeSystem() {
 
 // Get all tricycles from storage
 function getTricycles() {
-    return JSON.parse(localStorage.getItem('tricycles')) || [];
+    try {
+        return JSON.parse(localStorage.getItem('tricycles')) || [];
+    } catch (error) {
+        console.error('Error parsing tricycle data:', error);
+        // Return empty array and reset storage if data is corrupted
+        localStorage.removeItem('tricycles');
+        return [];
+    }
 }
 
 // Save tricycles to storage
@@ -148,14 +155,13 @@ document.getElementById('weather-status').textContent = localStorage.getItem('we
 
 // Register New Driver
 document.getElementById('register-driver-btn').addEventListener('click', function() {
-    const driverId = document.getElementById('driver-id').value.trim();
     const driverName = document.getElementById('driver-name').value.trim();
     const tricycleNumber = document.getElementById('tricycle-number').value.trim();
     const status = document.getElementById('status-select').value;
     const messageDiv = document.getElementById('driver-message');
     
-    if (!driverId || !driverName || !tricycleNumber) {
-        showMessage('Please fill in all fields', 'error');
+    if (!driverName || !tricycleNumber) {
+        showMessage('Please fill in driver name and tricycle number', 'error');
         return;
     }
     
@@ -164,7 +170,7 @@ document.getElementById('register-driver-btn').addEventListener('click', functio
     // Check if tricycle already exists
     const existingIndex = tricycles.findIndex(t => t.id === tricycleNumber);
     if (existingIndex !== -1) {
-        showMessage('Tricycle number already exists!', 'error');
+        showMessage('Tricycle number already exists! Use "Update Status" to change status.', 'error');
         return;
     }
     
@@ -181,7 +187,6 @@ document.getElementById('register-driver-btn').addEventListener('click', functio
     showMessage('Driver registered successfully!', 'success');
     
     // Clear form
-    document.getElementById('driver-id').value = '';
     document.getElementById('driver-name').value = '';
     document.getElementById('tricycle-number').value = '';
 });
