@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TodaTrack - Real-time tricycle monitoring system for TSU-SI">
+    <title>TodaTrack - Real-Time Tricycle Monitoring System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🚖 TodaTrack</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="student.html">Student Side</a></li>
+                <li><a href="driver.html">Driver Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to TodaTrack</h1>
+        <p>A Real-Time Object-Oriented Tricycle Monitoring System for TSU-SI</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Introduction Section -->
+        <section class="section">
+            <h2>About TodaTrack</h2>
+            <p>
+                TodaTrack is a real-time digital monitoring system designed specifically for the TSU-SI TODA 
+                (Tricycle Operators and Drivers Association) to bridge the communication gap between students 
+                and tricycle drivers. The system addresses the persistent problem of student uncertainty 
+                regarding ride availability, especially during peak hours (6:00 PM – 9:00 PM) or inclement weather.
+            </p>
+            <p>
+                Built with Object-Oriented Programming principles, TodaTrack provides a comprehensive solution 
+                for tracking tricycles, monitoring drivers, and managing trips efficiently. The system ensures 
+                real-time synchronization of data and implements robust security measures through encapsulation 
+                and Row-Level Security (RLS).
+            </p>
+        </section>
+
+        <!-- Main Features Section -->
+        <section class="section">
+            <h2>Main Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🚖 Tricycle Registration</h3>
+                    <p>
+                        Easy registration system for tricycles and drivers. Each tricycle is registered with 
+                        a unique plate number, driver information, and passenger capacity. The system maintains 
+                        a complete database of all registered vehicles and their current status.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>🚀 Trip Startups</h3>
+                    <p>
+                        Seamless trip creation and assignment system. Students can request trips by specifying 
+                        their destination, passenger count, and preferred route. The system automatically assigns 
+                        available tricycles or queues the request for the next available driver.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Trip Archiving</h3>
+                    <p>
+                        Complete trip history and analytics. All completed trips are archived with detailed 
+                        information including route, fare, passenger count, timestamps, and assigned driver. 
+                        This data provides valuable insights for operations management.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Real-Time Tracking</h3>
+                    <p>
+                        Live status updates for all tricycles and trips. Students can see waiting trips in 
+                        real-time, while drivers receive instant notifications about new trip requests. The 
+                        system ensures everyone stays informed about current operations.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 User-Friendly Interface</h3>
+                    <p>
+                        Intuitive design for both students and drivers. The student side displays waiting trips 
+                        with clear information, while the driver dashboard provides easy access to all necessary 
+                        functions for managing their service.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔒 Secure Operations</h3>
+                    <p>
+                        Built-in security measures including data encapsulation and Row-Level Security (RLS). 
+                        The system ensures that sensitive information is protected and users can only access 
+                        data relevant to their role.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GitHub Copilot Optimization Section -->
+        <section class="section">
+            <h2>GitHub Copilot Optimization</h2>
+            <p>
+                TodaTrack was developed with extensive use of GitHub Copilot, an AI-powered code completion tool 
+                that significantly enhanced the development process. By leveraging Copilot's capabilities, we 
+                achieved faster development cycles, better code quality, and more comprehensive documentation.
+            </p>
+            
+            <h3>Benefits of Using GitHub Copilot</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>⚡ Faster Development</h3>
+                    <p>Copilot generated boilerplate code and common patterns, allowing developers to focus on business logic and unique features.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Better Code Quality</h3>
+                    <p>AI suggestions followed best practices and industry standards, resulting in cleaner, more maintainable code.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📚 Comprehensive Documentation</h3>
+                    <p>Copilot helped generate detailed comments and documentation, making the codebase more accessible to new developers.</p>
+                </div>
+            </div>
+
+            <h3>Example Prompts for GitHub Copilot</h3>
+            <p>Here are some effective prompts that were used during TodaTrack development:</p>
+            
+            <div class="alert alert-info">
+                <strong>Prompt 1:</strong> "Create a JavaScript class for Tricycle with properties for plate number, driver name, capacity, and methods for starting and completing trips"
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>Prompt 2:</strong> "Write a function to register a new driver with validation for required fields and checking for duplicate plate numbers"
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>Prompt 3:</strong> "Implement a real-time update system that refreshes trip lists every 3 seconds without using WebSockets"
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>Prompt 4:</strong> "Create a responsive CSS design with a blue color scheme and modern card-based layout for displaying trips"
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>Prompt 5:</strong> "Generate a function to format Philippine Peso currency with proper symbol and two decimal places"
+            </div>
+        </section>
+
+        <!-- Repository Structure Section -->
+        <section class="section">
+            <h2>Repository Structure</h2>
+            <p>
+                TodaTrack follows a clean and organized folder structure that separates concerns and makes 
+                the codebase easy to navigate and maintain.
+            </p>
+            
+            <div class="code-block">
+                <pre>
+Toda-Track-System-for-TSU-SI/
+│
+├── index.html              # Homepage with introduction and features
+├── student.html            # Student side page showing waiting trips
+├── driver.html             # Driver dashboard for managing trips
+│
+├── css/
+│   └── style.css          # Main stylesheet with responsive design
+│
+├── js/
+│   └── main.js            # Core JavaScript with OOP classes and functions
+│
+├── images/                 # Image assets directory
+│
+└── README.md              # Project documentation
+                </pre>
+            </div>
+            
+            <h3>File Descriptions</h3>
+            <ul>
+                <li><strong>index.html</strong> - The main homepage introducing TodaTrack and its features</li>
+                <li><strong>student.html</strong> - Student-facing interface displaying available trips and real-time updates</li>
+                <li><strong>driver.html</strong> - Driver dashboard for registering tricycles, starting trips, and completing trips</li>
+                <li><strong>css/style.css</strong> - Comprehensive stylesheet with modern design and responsive layout</li>
+                <li><strong>js/main.js</strong> - Core JavaScript implementing OOP classes (Tricycle, Trip) and all functionality</li>
+            </ul>
+        </section>
+
+        <!-- Real-Time Sync Functionality Section -->
+        <section class="section">
+            <h2>Real-Time Sync Functionality</h2>
+            <p>
+                TodaTrack implements a real-time synchronization system that keeps all users updated with the 
+                latest information about tricycles and trips. This ensures that students see current trip 
+                availability and drivers receive immediate notifications about new requests.
+            </p>
+            
+            <h3>How Real-Time Sync Works</h3>
+            <p>
+                The system uses a polling mechanism that updates the display every 3 seconds. In a production 
+                environment, this would be replaced with WebSockets or Server-Sent Events for more efficient 
+                real-time communication.
+            </p>
+            
+            <div class="code-block">
+                <pre>
+// Real-time update implementation
+function simulateRealTimeUpdates() {
+    // Update waiting trips display
+    if (typeof updateWaitingTripsDisplay === 'function') {
+        updateWaitingTripsDisplay();
+    }
+    
+    // Update driver dashboard
+    if (typeof updateDriverDashboard === 'function') {
+        updateDriverDashboard();
+    }
+}
+
+// Start real-time updates (every 3 seconds)
+setInterval(simulateRealTimeUpdates, 3000);
+                </pre>
+            </div>
+            
+            <h3>Benefits of Real-Time Sync</h3>
+            <ul>
+                <li><strong>Immediate Updates</strong> - Students see new trips as soon as they're created</li>
+                <li><strong>Reduced Wait Times</strong> - Drivers are notified instantly about new requests</li>
+                <li><strong>Better User Experience</strong> - No need to manually refresh the page</li>
+                <li><strong>Accurate Status</strong> - Always shows the current state of all trips and tricycles</li>
+            </ul>
+        </section>
+
+        <!-- Encapsulation and RLS Security Section -->
+        <section class="section">
+            <h2>Encapsulation and RLS Security</h2>
+            <p>
+                Security is a fundamental aspect of TodaTrack. The system implements multiple layers of 
+                security to protect user data and ensure proper access control.
+            </p>
+            
+            <h3>Object-Oriented Encapsulation</h3>
+            <p>
+                The system uses OOP principles to encapsulate data and behavior. Each class (Tricycle, Trip) 
+                has private data that can only be accessed through defined methods, preventing unauthorized 
+                modifications.
+            </p>
+            
+            <div class="code-block">
+                <pre>
+class Tricycle {
+    constructor(plateNumber, driverName, capacity) {
+        this.plateNumber = plateNumber;
+        this.driverName = driverName;
+        this.capacity = capacity;
+        this.status = 'available';
+        this.currentTrip = null;
+    }
+
+    // Getter methods provide controlled access
+    getStatus() {
+        return this.status;
+    }
+
+    // Methods validate state before making changes
+    startTrip(trip) {
+        if (this.status === 'available') {
+            this.status = 'on-trip';
+            this.currentTrip = trip;
+            return true;
+        }
+        return false; // Prevents invalid state changes
+    }
+}
+                </pre>
+            </div>
+            
+            <h3>Row-Level Security (RLS)</h3>
+            <p>
+                In a production environment with a database backend (such as Supabase or PostgreSQL), TodaTrack 
+                would implement Row-Level Security policies to ensure:
+            </p>
+            <ul>
+                <li>Drivers can only view and modify their own tricycle information</li>
+                <li>Students can view all waiting trips but cannot modify trip data</li>
+                <li>Trip assignments are validated at the database level</li>
+                <li>Historical trip data is protected from unauthorized access</li>
+            </ul>
+            
+            <div class="alert alert-warning">
+                <strong>Production Note:</strong> When deploying with a real database, ensure RLS policies 
+                are configured to match user roles and permissions. Never expose database credentials in 
+                client-side code.
+            </div>
+        </section>
+
+        <!-- Example Code Section -->
+        <section class="section">
+            <h2>Example Code Implementations</h2>
+            
+            <h3>Registering a Driver</h3>
+            <p>
+                The driver registration function demonstrates input validation, duplicate checking, and 
+                proper object instantiation:
+            </p>
+            <div class="code-block">
+                <pre>
+function registerDriver(plateNumber, driverName, capacity) {
+    // Validation
+    if (!plateNumber || !driverName || !capacity) {
+        return {
+            success: false,
+            message: 'All fields are required'
+        };
+    }
+
+    // Check for duplicates
+    const exists = tricycles.find(t => t.plateNumber === plateNumber);
+    if (exists) {
+        return {
+            success: false,
+            message: 'Tricycle with this plate number already exists'
+        };
+    }
+
+    // Create and store new tricycle
+    const newTricycle = new Tricycle(plateNumber, driverName, capacity);
+    tricycles.push(newTricycle);
+
+    return {
+        success: true,
+        message: 'Driver registered successfully',
+        tricycle: newTricycle
+    };
+}
+                </pre>
+            </div>
+            
+            <h3>Creating a Trip</h3>
+            <p>
+                The trip creation function handles validation, auto-assignment, and maintains trip records:
+            </p>
+            <div class="code-block">
+                <pre>
+function createTrip(destination, passengerCount, fare, route) {
+    // Validation
+    if (!destination || !passengerCount || !fare || !route) {
+        return {
+            success: false,
+            message: 'All fields are required'
+        };
+    }
+
+    if (passengerCount < 1) {
+        return {
+            success: false,
+            message: 'Passenger count must be at least 1'
+        };
+    }
+
+    // Create trip object
+    const newTrip = new Trip(tripIdCounter++, destination, 
+                           passengerCount, fare, route);
+    trips.push(newTrip);
+
+    // Try auto-assignment
+    const availableTricycle = findAvailableTricycle(passengerCount);
+    if (availableTricycle) {
+        assignTripToTricycle(newTrip.id, availableTricycle.plateNumber);
+    }
+
+    return {
+        success: true,
+        message: 'Trip created successfully',
+        trip: newTrip
+    };
+}
+                </pre>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="section text-center">
+            <h2>Get Started with TodaTrack</h2>
+            <p>Explore the system from different perspectives:</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>👨‍🎓 Students</h3>
+                    <p>View available trips and track your ride in real-time</p>
+                    <a href="student.html" class="btn btn-primary">View Student Side</a>
+                </div>
+                <div class="feature-card">
+                    <h3>🚖 Drivers</h3>
+                    <p>Manage your tricycle and accept trip requests</p>
+                    <a href="driver.html" class="btn btn-primary">Open Driver Dashboard</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 TodaTrack - TSU-SI Tricycle Monitoring System</p>
+        <p>Developed with ❤️ and GitHub Copilot</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

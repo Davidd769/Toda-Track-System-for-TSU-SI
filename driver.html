@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TodaTrack Driver Dashboard - Manage trips and tricycle operations">
+    <title>Driver Dashboard - TodaTrack</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🚖 TodaTrack</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="student.html">Student Side</a></li>
+                <li><a href="driver.html">Driver Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Driver Dashboard</h1>
+        <p>Manage Your Tricycle and Accept Trip Requests</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Dashboard Overview -->
+        <section class="section">
+            <h2>📊 Dashboard Overview</h2>
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <h3>Total Tricycles</h3>
+                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--primary-color);" id="total-tricycles">
+                        0
+                    </div>
+                    <p>Registered in the system</p>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Available Now</h3>
+                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--success-color);" id="available-tricycles">
+                        0
+                    </div>
+                    <p>Ready to accept trips</p>
+                </div>
+                <div class="dashboard-card">
+                    <h3>On Trip</h3>
+                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--warning-color);" id="on-trip-tricycles">
+                        0
+                    </div>
+                    <p>Currently serving passengers</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Register Tricycle Section -->
+        <section class="section">
+            <h2>🚖 Register New Tricycle</h2>
+            <p>Add a new tricycle to the TodaTrack system. All fields are required.</p>
+            
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="plate-number">Plate Number *</label>
+                    <input type="text" id="plate-number" name="plate-number" 
+                           placeholder="e.g., ABC-123" required pattern="[A-Z]{3}-[0-9]{3}"
+                           title="Format: ABC-123 (3 uppercase letters, dash, 3 numbers)">
+                    <small style="color: var(--text-light);">Format: ABC-123</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="driver-name">Driver Name *</label>
+                    <input type="text" id="driver-name" name="driver-name" 
+                           placeholder="e.g., Juan Dela Cruz" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="capacity">Passenger Capacity *</label>
+                    <select id="capacity" name="capacity" required>
+                        <option value="">Select capacity</option>
+                        <option value="2">2 passengers</option>
+                        <option value="4">4 passengers</option>
+                        <option value="6">6 passengers</option>
+                        <option value="8">8 passengers</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    ✅ Register Tricycle
+                </button>
+            </form>
+        </section>
+
+        <!-- Registered Tricycles Section -->
+        <section class="section">
+            <h2>📋 Registered Tricycles</h2>
+            <p>View and manage all tricycles in the system</p>
+            
+            <div id="tricycles-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plate Number</th>
+                            <th>Driver Name</th>
+                            <th>Capacity</th>
+                            <th>Status</th>
+                            <th>Current Trip</th>
+                        </tr>
+                    </thead>
+                    <tbody id="driver-tricycles-tbody">
+                        <!-- Tricycles will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="no-driver-tricycles" style="display: none; text-align: center; padding: 2rem; color: var(--text-light);">
+                <p>No tricycles registered yet. Use the form above to register your first tricycle.</p>
+            </div>
+        </section>
+
+        <!-- Start Trip Section -->
+        <section class="section">
+            <h2>🚀 Start New Trip</h2>
+            <p>Manually start a trip by selecting a tricycle and creating trip details.</p>
+            
+            <form id="start-trip-form">
+                <div class="form-group">
+                    <label for="select-tricycle">Select Tricycle *</label>
+                    <select id="select-tricycle" name="select-tricycle" required>
+                        <option value="">Choose an available tricycle</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="trip-destination">Destination *</label>
+                    <input type="text" id="trip-destination" name="trip-destination" 
+                           placeholder="e.g., Main Campus, Library" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="trip-route">Route Description *</label>
+                    <input type="text" id="trip-route" name="trip-route" 
+                           placeholder="e.g., Gate 1 to Main Building" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="trip-passengers">Number of Passengers *</label>
+                    <input type="number" id="trip-passengers" name="trip-passengers" 
+                           min="1" max="10" value="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="trip-fare">Fare (₱) *</label>
+                    <input type="number" id="trip-fare" name="trip-fare" 
+                           min="0" step="0.01" placeholder="e.g., 50.00" required>
+                </div>
+                
+                <button type="submit" class="btn btn-success btn-block">
+                    🚀 Start Trip
+                </button>
+            </form>
+        </section>
+
+        <!-- Active Trips Section -->
+        <section class="section">
+            <h2>🔄 Active Trips</h2>
+            <p>Manage trips that are currently in progress</p>
+            
+            <div id="driver-active-trips-container" class="trip-list">
+                <!-- Active trips will be populated here -->
+            </div>
+            <div id="no-driver-active-trips" style="display: none; text-align: center; padding: 2rem; color: var(--text-light);">
+                <p>No active trips at the moment</p>
+            </div>
+        </section>
+
+        <!-- Usage Guide Section -->
+        <section class="section">
+            <h2>📖 Driver Usage Guide</h2>
+            <p>Learn how to effectively use the Driver Dashboard features</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>1️⃣ Register Your Tricycle</h3>
+                    <p>
+                        Start by registering your tricycle in the system. Fill out the registration form 
+                        with your plate number (format: ABC-123), driver name, and passenger capacity. 
+                        Once registered, your tricycle will appear in the system and be ready to accept trips.
+                    </p>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <pre>
+// Example registration
+Plate Number: ABC-123
+Driver Name: Juan Dela Cruz
+Capacity: 4 passengers
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h3>2️⃣ Start a Trip</h3>
+                    <p>
+                        When you're ready to start a trip, select your tricycle from the dropdown menu 
+                        and fill in the trip details (destination, route, passengers, fare). The system 
+                        will automatically mark your tricycle as "on-trip" and track the journey.
+                    </p>
+                    <div class="alert alert-info" style="margin-top: 1rem;">
+                        <strong>Tip:</strong> Only available tricycles appear in the dropdown. If yours 
+                        isn't listed, it may already be on a trip or off-duty.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h3>3️⃣ Complete Trips</h3>
+                    <p>
+                        Once you've delivered your passengers to their destination, use the "Complete Trip" 
+                        button in the Active Trips section. This will mark the trip as finished, update your 
+                        tricycle status back to "available", and archive the trip for record-keeping.
+                    </p>
+                    <div class="alert alert-success" style="margin-top: 1rem;">
+                        After completing a trip, your tricycle becomes immediately available for new assignments.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h3>4️⃣ Monitor Your Status</h3>
+                    <p>
+                        Keep an eye on the Dashboard Overview to see system-wide statistics. The "Registered 
+                        Tricycles" table shows the status of all tricycles, including your own. Real-time 
+                        updates ensure you always have the latest information.
+                    </p>
+                    <div class="alert alert-warning" style="margin-top: 1rem;">
+                        The page auto-refreshes every 3 seconds to show real-time updates.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices Section -->
+        <section class="section">
+            <h2>✅ Best Practices for Drivers</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>⚡ Quick Response</h3>
+                    <p>Accept trip requests as soon as possible to provide the best service to students. The faster you respond, the shorter their wait time.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 Stay Updated</h3>
+                    <p>Keep the dashboard open during your duty hours to receive real-time notifications about new trip requests and system updates.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✅ Complete Promptly</h3>
+                    <p>Mark trips as completed immediately after drop-off so your tricycle becomes available for the next passenger.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔍 Double-Check Details</h3>
+                    <p>Always verify the destination, route, and passenger count before starting a trip to avoid confusion.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Examples Section -->
+        <section class="section">
+            <h2>💻 Technical Implementation Examples</h2>
+            
+            <h3>How Driver Registration Works</h3>
+            <p>Behind the scenes, the registration process uses object-oriented programming:</p>
+            <div class="code-block">
+                <pre>
+// Step 1: Validate input data
+if (!plateNumber || !driverName || !capacity) {
+    return { success: false, message: 'All fields required' };
+}
+
+// Step 2: Check for duplicates
+const exists = tricycles.find(t => t.plateNumber === plateNumber);
+if (exists) {
+    return { success: false, message: 'Already registered' };
+}
+
+// Step 3: Create new Tricycle object
+const newTricycle = new Tricycle(plateNumber, driverName, capacity);
+
+// Step 4: Add to database
+tricycles.push(newTricycle);
+
+// Step 5: Return success
+return { success: true, tricycle: newTricycle };
+                </pre>
+            </div>
+
+            <h3>How Trip Starting Works</h3>
+            <p>The trip startup process ensures proper state management:</p>
+            <div class="code-block">
+                <pre>
+// Step 1: Create trip object
+const trip = new Trip(id, destination, passengers, fare, route);
+
+// Step 2: Find available tricycle
+const tricycle = tricycles.find(t => 
+    t.plateNumber === selectedPlate && 
+    t.status === 'available'
+);
+
+// Step 3: Assign trip to tricycle
+if (tricycle.startTrip(trip)) {
+    trip.assignTricycle(tricycle);
+    return { success: true };
+}
+
+// Tricycle.startTrip() method handles state validation
+startTrip(trip) {
+    if (this.status === 'available') {
+        this.status = 'on-trip';
+        this.currentTrip = trip;
+        return true;
+    }
+    return false; // Prevents invalid state changes
+}
+                </pre>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 TodaTrack - TSU-SI Tricycle Monitoring System</p>
+        <p>Developed with ❤️ and GitHub Copilot</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Driver Dashboard Specific JavaScript
+
+        /**
+         * Update dashboard statistics
+         */
+        function updateDashboardStats() {
+            const allTricycles = window.TodaTrack ? 
+                (tricycles || []) : [];
+            
+            const total = allTricycles.length;
+            const available = allTricycles.filter(t => t.status === 'available').length;
+            const onTrip = allTricycles.filter(t => t.status === 'on-trip').length;
+            
+            document.getElementById('total-tricycles').textContent = total;
+            document.getElementById('available-tricycles').textContent = available;
+            document.getElementById('on-trip-tricycles').textContent = onTrip;
+        }
+
+        /**
+         * Update the tricycles table
+         */
+        function updateTricyclesTable() {
+            const allTricycles = tricycles || [];
+            const tbody = document.getElementById('driver-tricycles-tbody');
+            const noTricyclesMsg = document.getElementById('no-driver-tricycles');
+            const tableContainer = document.getElementById('tricycles-table-container');
+            
+            if (allTricycles.length === 0) {
+                tableContainer.style.display = 'none';
+                noTricyclesMsg.style.display = 'block';
+            } else {
+                tableContainer.style.display = 'block';
+                noTricyclesMsg.style.display = 'none';
+                
+                tbody.innerHTML = allTricycles.map(tricycle => {
+                    let statusBadge = '';
+                    let statusColor = '';
+                    
+                    if (tricycle.status === 'available') {
+                        statusBadge = 'Available';
+                        statusColor = 'badge-success';
+                    } else if (tricycle.status === 'on-trip') {
+                        statusBadge = 'On Trip';
+                        statusColor = 'badge-warning';
+                    } else {
+                        statusBadge = 'Off Duty';
+                        statusColor = 'badge';
+                    }
+                    
+                    const currentTripInfo = tricycle.currentTrip ? 
+                        `To ${tricycle.currentTrip.destination}` : '-';
+                    
+                    return `
+                        <tr>
+                            <td><strong>${tricycle.plateNumber}</strong></td>
+                            <td>${tricycle.driverName}</td>
+                            <td>${tricycle.capacity} passengers</td>
+                            <td><span class="badge ${statusColor}">${statusBadge}</span></td>
+                            <td>${currentTripInfo}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        }
+
+        /**
+         * Update tricycle dropdown options
+         */
+        function updateTricycleDropdown() {
+            const availableTricycles = TodaTrack.getAvailableTricycles();
+            const select = document.getElementById('select-tricycle');
+            
+            // Keep the first default option
+            select.innerHTML = '<option value="">Choose an available tricycle</option>';
+            
+            availableTricycles.forEach(tricycle => {
+                const option = document.createElement('option');
+                option.value = tricycle.plateNumber;
+                option.textContent = `${tricycle.plateNumber} - ${tricycle.driverName} (${tricycle.capacity} seats)`;
+                select.appendChild(option);
+            });
+        }
+
+        /**
+         * Update active trips display for drivers
+         */
+        function updateDriverActiveTrips() {
+            const activeTrips = TodaTrack.getActiveTrips();
+            const container = document.getElementById('driver-active-trips-container');
+            const noTripsMsg = document.getElementById('no-driver-active-trips');
+            
+            if (activeTrips.length === 0) {
+                container.style.display = 'none';
+                noTripsMsg.style.display = 'block';
+            } else {
+                container.style.display = 'grid';
+                noTripsMsg.style.display = 'none';
+                
+                container.innerHTML = activeTrips.map(trip => `
+                    <div class="trip-card">
+                        <div class="trip-info">
+                            <h3>📍 ${trip.destination}</h3>
+                            <p style="color: var(--text-light); margin-bottom: 0.5rem;">
+                                <strong>Route:</strong> ${trip.route}
+                            </p>
+                            <p style="color: var(--text-light); margin-bottom: 0.5rem;">
+                                <strong>Driver:</strong> ${trip.assignedTricycle.driverName} 
+                                (${trip.assignedTricycle.plateNumber})
+                            </p>
+                            <div class="trip-details">
+                                <div class="trip-detail">
+                                    <span>👥 ${trip.passengerCount} passenger(s)</span>
+                                </div>
+                                <div class="trip-detail">
+                                    <span>💰 ${TodaTrack.formatCurrency(trip.fare)}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div class="trip-status status-active">
+                                Active
+                            </div>
+                            <button class="btn btn-danger" onclick="handleCompleteTrip(${trip.id})">
+                                ✅ Complete
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        /**
+         * Update all driver dashboard displays
+         */
+        function updateDriverDashboard() {
+            updateDashboardStats();
+            updateTricyclesTable();
+            updateTricycleDropdown();
+            updateDriverActiveTrips();
+        }
+
+        /**
+         * Handle tricycle registration
+         */
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const plateNumber = document.getElementById('plate-number').value.toUpperCase();
+            const driverName = document.getElementById('driver-name').value;
+            const capacity = parseInt(document.getElementById('capacity').value);
+            
+            const result = TodaTrack.registerDriver(plateNumber, driverName, capacity);
+            
+            if (result.success) {
+                TodaTrack.showMessage(result.message, 'success');
+                document.getElementById('register-form').reset();
+                updateDriverDashboard();
+            } else {
+                TodaTrack.showMessage(result.message, 'error');
+            }
+        });
+
+        /**
+         * Handle trip start
+         */
+        document.getElementById('start-trip-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const plateNumber = document.getElementById('select-tricycle').value;
+            const destination = document.getElementById('trip-destination').value;
+            const route = document.getElementById('trip-route').value;
+            const passengers = parseInt(document.getElementById('trip-passengers').value);
+            const fare = parseFloat(document.getElementById('trip-fare').value);
+            
+            if (!plateNumber) {
+                TodaTrack.showMessage('Please select a tricycle', 'error');
+                return;
+            }
+            
+            // Create trip
+            const tripResult = TodaTrack.createTrip(destination, passengers, fare, route);
+            
+            if (tripResult.success) {
+                // Assign to selected tricycle
+                const assignResult = TodaTrack.assignTripToTricycle(tripResult.trip.id, plateNumber);
+                
+                if (assignResult.success) {
+                    TodaTrack.showMessage('Trip started successfully!', 'success');
+                    document.getElementById('start-trip-form').reset();
+                    updateDriverDashboard();
+                } else {
+                    TodaTrack.showMessage(assignResult.message, 'error');
+                }
+            } else {
+                TodaTrack.showMessage(tripResult.message, 'error');
+            }
+        });
+
+        /**
+         * Handle trip completion
+         */
+        function handleCompleteTrip(tripId) {
+            const result = TodaTrack.completeTrip(tripId);
+            
+            if (result.success) {
+                TodaTrack.showMessage('Trip completed successfully!', 'success');
+                updateDriverDashboard();
+            } else {
+                TodaTrack.showMessage(result.message, 'error');
+            }
+        }
+
+        // Make function globally available
+        window.handleCompleteTrip = handleCompleteTrip;
+
+        // Initialize sample data
+        TodaTrack.initializeSampleData();
+
+        // Initial dashboard update
+        updateDriverDashboard();
+
+        // Start real-time updates
+        TodaTrack.startRealTimeUpdates();
+
+        // Make update function available globally for real-time updates
+        window.updateDriverDashboard = updateDriverDashboard;
+    </script>
+</body>
+</html>
