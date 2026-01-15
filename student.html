@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TodaTrack Student Side - View available trips and tricycles">
+    <title>Student Side - TodaTrack</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">🚖 TodaTrack</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="student.html">Student Side</a></li>
+                <li><a href="driver.html">Driver Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Student Side</h1>
+        <p>View Available Trips and Track Your Ride in Real-Time</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Real-Time Status -->
+        <section class="section">
+            <h2>📊 System Status</h2>
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <h3>Available Tricycles</h3>
+                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--success-color);" id="available-count">
+                        0
+                    </div>
+                    <p>Tricycles ready to accept trips</p>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Waiting Trips</h3>
+                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--warning-color);" id="waiting-count">
+                        0
+                    </div>
+                    <p>Trips waiting for assignment</p>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Active Trips</h3>
+                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--primary-color);" id="active-count">
+                        0
+                    </div>
+                    <p>Trips currently in progress</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Waiting Trips Section -->
+        <section class="section">
+            <h2>⏳ Waiting Trips</h2>
+            <div class="alert alert-info">
+                <strong>Real-Time Updates:</strong> This list automatically updates every 3 seconds with the latest trip information.
+            </div>
+            <div id="waiting-trips-container" class="trip-list">
+                <!-- Trips will be populated here by JavaScript -->
+            </div>
+            <div id="no-waiting-trips" style="display: none; text-align: center; padding: 2rem; color: var(--text-light);">
+                <p style="font-size: 1.2rem;">✅ No waiting trips at the moment</p>
+                <p>All trips have been assigned to available tricycles</p>
+            </div>
+        </section>
+
+        <!-- Active Trips Section -->
+        <section class="section">
+            <h2>🚀 Active Trips</h2>
+            <p>Trips currently in progress</p>
+            <div id="active-trips-container" class="trip-list">
+                <!-- Active trips will be populated here by JavaScript -->
+            </div>
+            <div id="no-active-trips" style="display: none; text-align: center; padding: 2rem; color: var(--text-light);">
+                <p style="font-size: 1.2rem;">No active trips currently</p>
+            </div>
+        </section>
+
+        <!-- Available Tricycles Section -->
+        <section class="section">
+            <h2>🚖 Available Tricycles</h2>
+            <p>Tricycles ready to accept new trips</p>
+            <div id="available-tricycles-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plate Number</th>
+                            <th>Driver Name</th>
+                            <th>Capacity</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tricycles-tbody">
+                        <!-- Tricycles will be populated here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="no-tricycles" style="display: none; text-align: center; padding: 2rem; color: var(--text-light);">
+                <p>No tricycles available at the moment</p>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="section">
+            <h2>📖 How to Use the Student Side</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>1. View Waiting Trips</h3>
+                    <p>Check the "Waiting Trips" section to see all trips that are waiting for a tricycle assignment. Each card shows the destination, route, passenger count, and fare.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>2. Monitor Active Trips</h3>
+                    <p>The "Active Trips" section displays all trips currently in progress. You can see which tricycle is assigned and track the trip status.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>3. Check Available Tricycles</h3>
+                    <p>View all tricycles that are currently available and ready to accept new trips. The table shows driver names, plate numbers, and capacity.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>4. Real-Time Updates</h3>
+                    <p>The page automatically refreshes every 3 seconds, so you always see the most up-to-date information without needing to manually refresh.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trip Details Explanation -->
+        <section class="section">
+            <h2>🔍 Understanding Trip Information</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>📍 Route & Destination</h3>
+                    <p>Shows the starting point and final destination of the trip. For example, "Gate 1 to Main Building" or "Dormitory to Library".</p>
+                </div>
+                <div class="feature-card">
+                    <h3>👥 Passenger Count</h3>
+                    <p>Indicates how many passengers are traveling. This helps determine which tricycle (based on capacity) can accept the trip.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💰 Fare</h3>
+                    <p>The cost of the trip in Philippine Peso (₱). Fares are displayed in the standard currency format with two decimal places.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🏷️ Trip Status</h3>
+                    <p>
+                        <span class="badge badge-warning">Waiting</span> - Trip is waiting for tricycle assignment<br>
+                        <span class="badge badge-success">Active</span> - Trip is currently in progress<br>
+                        <span class="badge" style="background: var(--text-light); color: white;">Completed</span> - Trip has been finished
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Request a Trip Section -->
+        <section class="section">
+            <h2>➕ Request a New Trip</h2>
+            <p>Need a ride? Fill out the form below to request a new trip. Available tricycles will be notified automatically.</p>
+            
+            <form id="request-trip-form">
+                <div class="form-group">
+                    <label for="destination">Destination *</label>
+                    <input type="text" id="destination" name="destination" 
+                           placeholder="e.g., Main Campus, Library, Dormitory" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="route">Route Description *</label>
+                    <input type="text" id="route" name="route" 
+                           placeholder="e.g., Gate 1 to Main Building" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="passengers">Number of Passengers *</label>
+                    <input type="number" id="passengers" name="passengers" 
+                           min="1" max="10" value="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fare">Fare (₱) *</label>
+                    <input type="number" id="fare" name="fare" 
+                           min="0" step="0.01" placeholder="e.g., 50.00" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    🚀 Request Trip
+                </button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 TodaTrack - TSU-SI Tricycle Monitoring System</p>
+        <p>Developed with ❤️ and GitHub Copilot</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Student Side Specific JavaScript
+
+        /**
+         * Update the waiting trips display
+         */
+        function updateWaitingTripsDisplay() {
+            const waitingTrips = TodaTrack.getWaitingTrips();
+            const container = document.getElementById('waiting-trips-container');
+            const noTripsMessage = document.getElementById('no-waiting-trips');
+            
+            if (waitingTrips.length === 0) {
+                container.style.display = 'none';
+                noTripsMessage.style.display = 'block';
+            } else {
+                container.style.display = 'grid';
+                noTripsMessage.style.display = 'none';
+                
+                container.innerHTML = waitingTrips.map(trip => `
+                    <div class="trip-card">
+                        <div class="trip-info">
+                            <h3>📍 ${trip.destination}</h3>
+                            <p style="color: var(--text-light); margin-bottom: 0.5rem;">
+                                <strong>Route:</strong> ${trip.route}
+                            </p>
+                            <div class="trip-details">
+                                <div class="trip-detail">
+                                    <span>👥 ${trip.passengerCount} passenger(s)</span>
+                                </div>
+                                <div class="trip-detail">
+                                    <span>💰 ${TodaTrack.formatCurrency(trip.fare)}</span>
+                                </div>
+                                <div class="trip-detail">
+                                    <span>🕐 ${TodaTrack.formatDateTime(trip.createdAt)}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="trip-status status-waiting">
+                                Waiting
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Update counter
+            document.getElementById('waiting-count').textContent = waitingTrips.length;
+        }
+
+        /**
+         * Update the active trips display
+         */
+        function updateActiveTripsDisplay() {
+            const activeTrips = TodaTrack.getActiveTrips();
+            const container = document.getElementById('active-trips-container');
+            const noTripsMessage = document.getElementById('no-active-trips');
+            
+            if (activeTrips.length === 0) {
+                container.style.display = 'none';
+                noTripsMessage.style.display = 'block';
+            } else {
+                container.style.display = 'grid';
+                noTripsMessage.style.display = 'none';
+                
+                container.innerHTML = activeTrips.map(trip => `
+                    <div class="trip-card">
+                        <div class="trip-info">
+                            <h3>📍 ${trip.destination}</h3>
+                            <p style="color: var(--text-light); margin-bottom: 0.5rem;">
+                                <strong>Route:</strong> ${trip.route}
+                            </p>
+                            <p style="color: var(--text-light); margin-bottom: 0.5rem;">
+                                <strong>Driver:</strong> ${trip.assignedTricycle ? trip.assignedTricycle.driverName : 'N/A'} 
+                                (${trip.assignedTricycle ? trip.assignedTricycle.plateNumber : 'N/A'})
+                            </p>
+                            <div class="trip-details">
+                                <div class="trip-detail">
+                                    <span>👥 ${trip.passengerCount} passenger(s)</span>
+                                </div>
+                                <div class="trip-detail">
+                                    <span>💰 ${TodaTrack.formatCurrency(trip.fare)}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="trip-status status-active">
+                                Active
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Update counter
+            document.getElementById('active-count').textContent = activeTrips.length;
+        }
+
+        /**
+         * Update the available tricycles display
+         */
+        function updateAvailableTricyclesDisplay() {
+            const availableTricycles = TodaTrack.getAvailableTricycles();
+            const tbody = document.getElementById('tricycles-tbody');
+            const noTricyclesMessage = document.getElementById('no-tricycles');
+            const table = document.getElementById('available-tricycles-container');
+            
+            if (availableTricycles.length === 0) {
+                table.style.display = 'none';
+                noTricyclesMessage.style.display = 'block';
+            } else {
+                table.style.display = 'block';
+                noTricyclesMessage.style.display = 'none';
+                
+                tbody.innerHTML = availableTricycles.map(tricycle => `
+                    <tr>
+                        <td><strong>${tricycle.plateNumber}</strong></td>
+                        <td>${tricycle.driverName}</td>
+                        <td>${tricycle.capacity} passengers</td>
+                        <td><span class="badge badge-success">Available</span></td>
+                    </tr>
+                `).join('');
+            }
+            
+            // Update counter
+            document.getElementById('available-count').textContent = availableTricycles.length;
+        }
+
+        /**
+         * Handle trip request form submission
+         */
+        document.getElementById('request-trip-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const destination = document.getElementById('destination').value;
+            const route = document.getElementById('route').value;
+            const passengers = parseInt(document.getElementById('passengers').value);
+            const fare = parseFloat(document.getElementById('fare').value);
+            
+            const result = TodaTrack.createTrip(destination, passengers, fare, route);
+            
+            if (result.success) {
+                TodaTrack.showMessage(result.message, 'success');
+                // Reset form
+                document.getElementById('request-trip-form').reset();
+                // Update displays
+                updateWaitingTripsDisplay();
+                updateActiveTripsDisplay();
+                updateAvailableTricyclesDisplay();
+            } else {
+                TodaTrack.showMessage(result.message, 'error');
+            }
+        });
+
+        // Initialize sample data
+        TodaTrack.initializeSampleData();
+
+        // Initial display update
+        updateWaitingTripsDisplay();
+        updateActiveTripsDisplay();
+        updateAvailableTricyclesDisplay();
+
+        // Start real-time updates
+        TodaTrack.startRealTimeUpdates();
+
+        // Make update functions available globally for real-time updates
+        window.updateWaitingTripsDisplay = updateWaitingTripsDisplay;
+        window.updateActiveTripsDisplay = updateActiveTripsDisplay;
+        window.updateAvailableTricyclesDisplay = updateAvailableTricyclesDisplay;
+
+        // Also update all displays when real-time update function is called
+        window.updateStudentSide = function() {
+            updateWaitingTripsDisplay();
+            updateActiveTripsDisplay();
+            updateAvailableTricyclesDisplay();
+        };
+    </script>
+</body>
+</html>
